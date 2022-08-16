@@ -11,15 +11,25 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Material App Bar'),
+          title: const Text('Scaffold App Bar'),
         ),
         body: Center(
           child: IconButton(
-            icon: const Icon(Icons.close),
+            icon: const Icon(
+              Icons.close,
+              color: Colors.white,
+            ),
             onPressed: () => {print("Hola mundo")},
             iconSize: 200,
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {},
+        ),
+        drawer: Drawer(),
+        endDrawer: Drawer(),
+        backgroundColor: Colors.black,
       ),
     );
   }
