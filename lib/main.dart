@@ -11,26 +11,31 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Scaffold App Bar'),
+          title: const Text('App Bar'),
+          actions: <Widget>[
+            IconButton(onPressed: _loginDummy, icon: const Icon(Icons.login))
+          ],
+          backgroundColor: Colors.grey,
         ),
-        body: Center(
-          child: IconButton(
-            icon: const Icon(
-              Icons.close,
-              color: Colors.white,
-            ),
-            onPressed: () => {print("Hola mundo")},
-            iconSize: 200,
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () {},
-        ),
+        // body: Center(
+        //   child: IconButton(
+        //     icon: const Icon(
+        //       Icons.close,
+        //       color: Colors.white,
+        //     ),
+        //     onPressed: () => {print("Hola mundo")},
+        //     iconSize: 200,
+        //   ),
+        // ),
+
         drawer: Drawer(),
-        endDrawer: Drawer(),
-        backgroundColor: Colors.black,
+        // endDrawer: Drawer(),
+        // backgroundColor: Colors.black,
       ),
     );
+  }
+
+  void _loginDummy() {
+    print("Hola mundo");
   }
 }
