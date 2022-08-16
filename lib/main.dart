@@ -17,16 +17,41 @@ class MyApp extends StatelessWidget {
           ],
           backgroundColor: Colors.grey,
         ),
-        // body: Center(
-        //   child: IconButton(
-        //     icon: const Icon(
-        //       Icons.close,
-        //       color: Colors.white,
-        //     ),
-        //     onPressed: () => {print("Hola mundo")},
-        //     iconSize: 200,
-        //   ),
-        // ),
+        body: SizedBox(
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center, // vertical
+            crossAxisAlignment: CrossAxisAlignment.center, // horizontal
+            children: <Widget>[
+              Container(
+                color: Colors.orange,
+                height: 100,
+                width: 100,
+              ),
+              Container(
+                color: Colors.red,
+                height: 100,
+                width: 59,
+              ),
+              Text('Hola mundo'),
+              Text('Hola mundo'),
+              Text('Hola mundo'),
+              Text('Hola mundo'),
+              Text('Hola mundo'),
+              Text('Hola mundo'),
+              Text('Hola mundo'),
+              Text('Hola mundo'),
+              Text('Hola mundo'),
+              Text('Hola mundo'),
+              Text('Hola mundo'),
+              Text('Hola mundo'),
+              Text('Hola mundo'),
+              Text('Hola mundo'),
+              Text('Hola mundo'),
+              Text('Hola mundo'),
+            ],
+          ),
+        ),
 
         drawer: Drawer(),
         // endDrawer: Drawer(),
