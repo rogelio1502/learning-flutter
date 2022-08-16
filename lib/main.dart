@@ -14,12 +14,10 @@ class MyApp extends StatelessWidget {
           title: const Text('Material App Bar'),
         ),
         body: Center(
-          child: Image.network(
-            'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*',
-            // height: 250,
-            // width: 350,
-            // fit: BoxFit.fitHeight,
-            fit: BoxFit.contain,
+          child: IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () => {print("Hola mundo")},
+            iconSize: 200,
           ),
         ),
       ),
