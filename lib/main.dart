@@ -17,57 +17,18 @@ class MyApp extends StatelessWidget {
           ],
           backgroundColor: Colors.grey,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text('Hola mundo 1'),
-                  ),
-                  Icon(
-                    Icons.analytics,
-                    size: 40,
-                  ),
-                  Switch(value: true, onChanged: (value) {})
-                ],
-              ),
-              Divider(),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text('Hola mundo 2'),
-                  ),
-                  Icon(
-                    Icons.analytics,
-                    size: 40,
-                  ),
-                  Switch(value: true, onChanged: (value) {})
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    color: Colors.amber,
-                    height: 100,
-                    width: 100,
-                  ),
-                  Container(
-                    color: Colors.black,
-                    height: 100,
-                    width: 100,
-                  ),
-                  Container(
-                    color: Colors.green,
-                    height: 100,
-                    width: 100,
-                  )
-                ],
-              )
-            ],
+        body: Container(
+          width: 200,
+          height: 200,
+          color: Colors.blue,
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(55),
+          child: Text(
+            "-----",
+            style: TextStyle(
+                backgroundColor: Colors.black,
+                fontSize: 60,
+                color: Colors.white),
           ),
         ),
 
