@@ -15,6 +15,11 @@ class _MyHomePageState extends State<MyHomePage> {
   String nameValue = '';
   String lastNameValue = '';
 
+  late final FocusNode nameFocusNode;
+  late final FocusNode lastNameFocusNode;
+  late final FocusNode phoneNumberFocusNode;
+  late final FocusNode emailFocusNode;
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -31,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
               key: _formKey,
               child: Column(children: [
                 TextFormField(
+                  focusNode: nameFocusNode,
                   controller: nameTextController,
                   decoration: const InputDecoration(
                     labelText: "Nombre",
@@ -44,8 +50,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     }
                     return null;
                   },
+                  onEditingComplete: () {
+                    requestFocus(context, lastNameFocusNode);
+                  },
+                  textInputAction: TextInputAction.next,
                 ),
                 TextFormField(
+                  focusNode: lastNameFocusNode,
                   controller: lastNameTextController,
                   decoration: const InputDecoration(
                     labelText: "Apellido",
@@ -59,8 +70,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     }
                     return null;
                   },
+                  onEditingComplete: () {
+                    requestFocus(context, phoneNumberFocusNode);
+                  },
+                  textInputAction: TextInputAction.next,
                 ),
                 TextFormField(
+                  focusNode: phoneNumberFocusNode,
                   keyboardType: TextInputType.phone,
                   decoration: const InputDecoration(
                     labelText: "Número de telefono",
@@ -71,8 +87,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     }
                     return null;
                   },
+                  onEditingComplete: () {
+                    requestFocus(context, emailFocusNode);
+                  },
+                  textInputAction: TextInputAction.next,
                 ),
                 TextFormField(
+                  focusNode: emailFocusNode,
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     labelText: "Email",
@@ -101,7 +122,11 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  _showSecondPage(BuildContext context) {
+  void requestFocus(BuildContext context, FocusNode focusNode) {
+    FocusScope.of(context).requestFocus(focusNode);
+  }
+
+  void _showSecondPage(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       Navigator.of(context).pushNamed("/second",
@@ -116,6 +141,10 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    nameFocusNode = FocusNode();
+    lastNameFocusNode = FocusNode();
+    phoneNumberFocusNode = FocusNode();
+    emailFocusNode = FocusNode();
   }
 
   @override
@@ -124,5 +153,9 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
     nameTextController.dispose();
     lastNameTextController.dispose();
+    nameFocusNode.dispose();
+    lastNameFocusNode.dispose();
+    phoneNumberFocusNode.dispose();
+    emailFocusNode.dispose();
   }
 }
