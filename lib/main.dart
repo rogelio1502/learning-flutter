@@ -17,38 +17,56 @@ class MyApp extends StatelessWidget {
           ],
           backgroundColor: Colors.grey,
         ),
-        body: SizedBox(
-          width: double.infinity,
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // vertical
-            crossAxisAlignment: CrossAxisAlignment.center, // horizontal
             children: <Widget>[
-              Container(
-                color: Colors.orange,
-                height: 100,
-                width: 100,
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text('Hola mundo 1'),
+                  ),
+                  Icon(
+                    Icons.analytics,
+                    size: 40,
+                  ),
+                  Switch(value: true, onChanged: (value) {})
+                ],
               ),
-              Container(
-                color: Colors.red,
-                height: 100,
-                width: 59,
+              Divider(),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text('Hola mundo 2'),
+                  ),
+                  Icon(
+                    Icons.analytics,
+                    size: 40,
+                  ),
+                  Switch(value: true, onChanged: (value) {})
+                ],
               ),
-              Text('Hola mundo'),
-              Text('Hola mundo'),
-              Text('Hola mundo'),
-              Text('Hola mundo'),
-              Text('Hola mundo'),
-              Text('Hola mundo'),
-              Text('Hola mundo'),
-              Text('Hola mundo'),
-              Text('Hola mundo'),
-              Text('Hola mundo'),
-              Text('Hola mundo'),
-              Text('Hola mundo'),
-              Text('Hola mundo'),
-              Text('Hola mundo'),
-              Text('Hola mundo'),
-              Text('Hola mundo'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    color: Colors.amber,
+                    height: 100,
+                    width: 100,
+                  ),
+                  Container(
+                    color: Colors.black,
+                    height: 100,
+                    width: 100,
+                  ),
+                  Container(
+                    color: Colors.green,
+                    height: 100,
+                    width: 100,
+                  )
+                ],
+              )
             ],
           ),
         ),
