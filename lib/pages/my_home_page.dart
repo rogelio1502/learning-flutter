@@ -9,8 +9,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var nameTextController = TextEditingController();
-  var lastNameTextController = TextEditingController();
+  String nameValue = '';
+  String lastNameValue = '';
+
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,16 +24,38 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Container(
             padding: const EdgeInsets.all(16),
-            child: TextField(
-              decoration: InputDecoration(labelText: "Nombre"),
-              controller: nameTextController,
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(16),
-            child: TextField(
-              decoration: InputDecoration(labelText: "Apellido"),
-              controller: lastNameTextController,
+            child: Form(
+              key: _formKey,
+              child: Column(children: [
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: "Nombre",
+                  ),
+                  onSaved: (newValue) {
+                    nameValue = newValue.toString();
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: "Apellido",
+                  ),
+                  onSaved: (newValue) {
+                    lastNameValue = newValue.toString();
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                )
+              ]),
             ),
           ),
           Container(
@@ -48,33 +73,25 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _showSecondPage(BuildContext context) {
-    // final route = MaterialPageRoute(builder: (BuildContext context) {
-    //   return SecondPage(
-    //     name: "Marvin",
-    //   );
-    // });
-    // Navigator.of(context).push(route);
-
-    Navigator.of(context).pushNamed("/second",
-        arguments: SecondPageArguments(
-          name: nameTextController.text,
-          lastName: lastNameTextController.text,
-        ));
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      Navigator.of(context).pushNamed("/second",
+          arguments: SecondPageArguments(
+            name: nameValue,
+            lastName: lastNameValue,
+          ));
+    }
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    print("Hola mundo");
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-
-    nameTextController.dispose();
-    lastNameTextController.dispose();
   }
 }
