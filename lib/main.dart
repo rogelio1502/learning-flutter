@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -47,19 +48,19 @@ class MyHomePage extends StatelessWidget {
         ],
         backgroundColor: Colors.grey,
       ),
-      body: ListView.builder(
-          padding: EdgeInsets.all(15),
-          itemCount: names.length,
-          itemBuilder: (BuildContext context, int index) {
-            final name = names[index];
-            return ListTile(
-              title: Text(name),
-              leading: Icon(Icons.person),
+      body: ListView(
+        padding: EdgeInsets.all(15),
+        children: <Widget>[
+          Card(
+            child: InkWell(
               onTap: () {
-                print(name);
+                print("Hola mund f");
               },
-            );
-          }),
+              child: Image.asset('dog-1.jpeg'),
+            ),
+          ),
+        ],
+      ),
 
       drawer: Drawer(),
       // endDrawer: Drawer(),
