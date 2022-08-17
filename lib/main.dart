@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:my_app/pages/my_home_page.dart';
+import 'package:my_app/pages/second_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -9,70 +11,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Material App',
-      home: MyHomePage(),
+      // home: MyHomePage(),
+      initialRoute: "/",
+      routes: {
+        '/': (context) => const MyHomePage(),
+        '/second': (context) => const SecondPage()
+      },
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  String name = "Marvin";
-  double progressValue = 0;
-  bool changesEnabled = false;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Gesture Detector'),
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            RaisedButton(
-              onPressed: () {},
-              child: Text("Hola mundo"),
-            ),
-            FlatButton(
-              onPressed: () {},
-              child: Text('Hola mundo'),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.delete),
-            ),
-            OutlinedButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                ),
-              ),
-              child: const Text("Hola mundo"),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
   }
 }
