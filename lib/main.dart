@@ -36,8 +36,9 @@ class MyHomePage extends StatelessWidget {
           itemCount: names.length,
           itemBuilder: (BuildContext context, int index) {
             final name = names[index];
-            return Card(
-              child: Text(name),
+            return ListTile(
+              title: Text(name),
+              leading: Icon(Icons.person),
             );
           }),
 
