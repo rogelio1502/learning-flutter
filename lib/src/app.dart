@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/src/screens/my_home_page.dart';
 
-import '../screens/second_page.dart';
+import 'package:my_app/src/screens/second_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../screens/second_page.dart';
+import 'package:my_app/src/screens/second_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -10,153 +9,88 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final nameTextController = TextEditingController(text: "Rogelio");
-  final lastNameTextController = TextEditingController(text: "Torres");
-
-  String nameValue = '';
-  String lastNameValue = '';
-
-  late final FocusNode nameFocusNode;
-  late final FocusNode lastNameFocusNode;
-  late final FocusNode phoneNumberFocusNode;
-  late final FocusNode emailFocusNode;
-
-  final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
       ),
-      body: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16),
-            child: Form(
-              key: _formKey,
-              child: Column(children: [
-                TextFormField(
-                  focusNode: nameFocusNode,
-                  controller: nameTextController,
-                  decoration: const InputDecoration(
-                    labelText: "Nombre",
-                  ),
-                  onSaved: (newValue) {
-                    nameValue = newValue.toString();
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                  onEditingComplete: () {
-                    requestFocus(context, lastNameFocusNode);
-                  },
-                  textInputAction: TextInputAction.next,
-                ),
-                TextFormField(
-                  focusNode: lastNameFocusNode,
-                  controller: lastNameTextController,
-                  decoration: const InputDecoration(
-                    labelText: "Apellido",
-                  ),
-                  onSaved: (newValue) {
-                    lastNameValue = newValue.toString();
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                  onEditingComplete: () {
-                    requestFocus(context, phoneNumberFocusNode);
-                  },
-                  textInputAction: TextInputAction.next,
-                ),
-                TextFormField(
-                  focusNode: phoneNumberFocusNode,
-                  keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(
-                    labelText: "Número de telefono",
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                  onEditingComplete: () {
-                    requestFocus(context, emailFocusNode);
-                  },
-                  textInputAction: TextInputAction.next,
-                ),
-                TextFormField(
-                  focusNode: emailFocusNode,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    labelText: "Email",
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                )
-              ]),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(16),
-            child: RaisedButton(
-              child: const Text("Mostrar segunda pantalla"),
-              onPressed: () {
-                _showSecondPage(context);
-              },
-            ),
-          ),
-        ],
+      body: Center(
+        child: Column(children: const [
+          Center(
+            child: Text('Hola mundo'),
+          )
+        ]),
+      ),
+      drawer: _getDrawer(context),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.menu),
+        onPressed: () => _scaffoldKey.currentState!.openDrawer(),
       ),
     );
-  }
-
-  void requestFocus(BuildContext context, FocusNode focusNode) {
-    FocusScope.of(context).requestFocus(focusNode);
-  }
-
-  void _showSecondPage(BuildContext context) {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      Navigator.of(context).pushNamed("/second",
-          arguments: SecondPageArguments(
-            name: nameValue,
-            lastName: lastNameValue,
-          ));
-    }
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    nameFocusNode = FocusNode();
-    lastNameFocusNode = FocusNode();
-    phoneNumberFocusNode = FocusNode();
-    emailFocusNode = FocusNode();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    nameTextController.dispose();
-    lastNameTextController.dispose();
-    nameFocusNode.dispose();
-    lastNameFocusNode.dispose();
-    phoneNumberFocusNode.dispose();
-    emailFocusNode.dispose();
+  }
+
+  Widget _getDrawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        children: [
+          UserAccountsDrawerHeader(
+            accountName: Text("Rogelio Torres"),
+            accountEmail: Text("rogelio@gmail.com"),
+          ),
+          DrawerHeader(
+            decoration: const BoxDecoration(color: Colors.black),
+            child: Row(children: const [
+              FlutterLogo(
+                size: 100,
+              ),
+              Text(
+                'My App',
+                style: TextStyle(fontSize: 30, color: Colors.white),
+              )
+            ]),
+          ),
+          ListTile(
+            title: const Text('Home'),
+            leading: const Icon(Icons.home),
+            onTap: () => _goHome(context),
+          ),
+          ListTile(
+            title: const Text('Second Page'),
+            leading: const Icon(Icons.home),
+            onTap: () => _goSecondPage(context),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _goHome(BuildContext context) {
+    Navigator.pop(context);
+  }
+
+  void _goSecondPage(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      '/second',
+      arguments: SecondPageArguments(
+        name: "Rgoelio",
+        lastName: "Pasillas",
+      ),
+    );
   }
 }
