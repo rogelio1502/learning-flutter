@@ -17,17 +17,12 @@ class MyApp extends StatelessWidget {
           ],
           backgroundColor: Colors.grey,
         ),
-        body: Column(
-          children: <Widget>[
-            Text("Hola"),
-            SizedBox(
-              height: 40,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 30),
-              child: Text("Bienvenidos"),
-            ),
-          ],
+        body: Center(
+          child: Container(
+            width: 200,
+            height: 200,
+            color: Colors.amber[500],
+          ),
         ),
 
         drawer: Drawer(),
