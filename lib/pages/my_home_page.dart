@@ -23,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('Home'),
       ),
-      body: ListView(
+      body: Column(
         children: [
           Container(
             padding: const EdgeInsets.all(16),
@@ -59,6 +59,30 @@ class _MyHomePageState extends State<MyHomePage> {
                     }
                     return null;
                   },
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.phone,
+                  decoration: const InputDecoration(
+                    labelText: "Número de telefono",
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    labelText: "Email",
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
                 )
               ]),
             ),
@@ -71,11 +95,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 _showSecondPage(context);
               },
             ),
-          ),
-          Container(
-            padding: EdgeInsets.all(16),
-            height: 2000,
-            color: Colors.amber,
           ),
         ],
       ),
