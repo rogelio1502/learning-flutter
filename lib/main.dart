@@ -17,12 +17,24 @@ class MyApp extends StatelessWidget {
           ],
           backgroundColor: Colors.grey,
         ),
-        body: Center(
-          child: Container(
-            width: 200,
-            height: 200,
-            color: Colors.amber[500],
-          ),
+        body: ListView(
+          children: <Widget>[
+            Card(
+              child: Text('Hola mundo'),
+            ),
+            Card(
+              child: Text('Hola mundo'),
+            ),
+            Card(
+              child: Text('Hola mundo'),
+            ),
+            Card(
+              child: Text('Hola mundo'),
+            ),
+            Card(
+              child: Text('Hola mundo'),
+            ),
+          ],
         ),
 
         drawer: Drawer(),
