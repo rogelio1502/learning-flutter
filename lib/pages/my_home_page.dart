@@ -9,6 +9,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final nameTextController = TextEditingController(text: "Rogelio");
+  final lastNameTextController = TextEditingController(text: "Torres");
+
   String nameValue = '';
   String lastNameValue = '';
 
@@ -20,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('Home'),
       ),
-      body: Column(
+      body: ListView(
         children: [
           Container(
             padding: const EdgeInsets.all(16),
@@ -28,6 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
               key: _formKey,
               child: Column(children: [
                 TextFormField(
+                  controller: nameTextController,
                   decoration: const InputDecoration(
                     labelText: "Nombre",
                   ),
@@ -42,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 TextFormField(
+                  controller: lastNameTextController,
                   decoration: const InputDecoration(
                     labelText: "Apellido",
                   ),
@@ -66,7 +71,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 _showSecondPage(context);
               },
             ),
-          )
+          ),
+          Container(
+            padding: EdgeInsets.all(16),
+            height: 2000,
+            color: Colors.amber,
+          ),
         ],
       ),
     );
@@ -93,5 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+    nameTextController.dispose();
+    lastNameTextController.dispose();
   }
 }
