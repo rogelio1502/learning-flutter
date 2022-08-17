@@ -19,7 +19,23 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
 
-  List<String> names = ['Rogelio', 'Susana', 'Javier'];
+  List<String> names = [
+    'Rogelio',
+    'Susana',
+    'Javier',
+    'Rogelio',
+    'Susana',
+    'Javier',
+    'Rogelio',
+    'Susana',
+    'Javier',
+    'Rogelio',
+    'Susana',
+    'Javier',
+    'Rogelio',
+    'Susana',
+    'Javier',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +55,9 @@ class MyHomePage extends StatelessWidget {
             return ListTile(
               title: Text(name),
               leading: Icon(Icons.person),
+              onTap: () {
+                print(name);
+              },
             );
           }),
 
