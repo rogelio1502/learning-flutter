@@ -1,6 +1,5 @@
-import 'dart:math';
+import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -10,65 +9,86 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Material App',
       home: MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  MyHomePage({super.key});
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
 
-  List<String> names = [
-    'Rogelio',
-    'Susana',
-    'Javier',
-    'Rogelio',
-    'Susana',
-    'Javier',
-    'Rogelio',
-    'Susana',
-    'Javier',
-    'Rogelio',
-    'Susana',
-    'Javier',
-    'Rogelio',
-    'Susana',
-    'Javier',
-  ];
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
 
+class _MyHomePageState extends State<MyHomePage> {
+  String name = "Marvin";
+  double progressValue = 0;
+  bool changesEnabled = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('App Bar'),
-        actions: <Widget>[
-          IconButton(onPressed: _loginDummy, icon: const Icon(Icons.login))
-        ],
-        backgroundColor: Colors.grey,
+        title: const Text('StateFull Widget'),
       ),
-      body: ListView(
-        padding: EdgeInsets.all(15),
-        children: <Widget>[
-          Card(
-            child: InkWell(
-              onTap: () {
-                print("Hola mund f");
-              },
-              child: Image.asset('dog-1.jpeg'),
-            ),
+      body: Column(
+        children: [
+          Center(
+            child: Text(name),
           ),
+          LinearProgressIndicator(
+            value: progressValue,
+          ),
+          Switch(
+              value: changesEnabled,
+              onChanged: (value) {
+                _enableChange(value);
+              })
         ],
       ),
-
-      drawer: Drawer(),
-      // endDrawer: Drawer(),
-      // backgroundColor: Colors.black,
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.change_circle),
+        onPressed: _changeName,
+      ),
     );
   }
 
-  void _loginDummy() {
-    print("Hola mundo");
+  void _enableChange(bool enable) {
+    setState(() {
+      changesEnabled = enable;
+    });
+  }
+
+  void _changeName() {
+    setState(() {
+      if (name == "Rogelio") {
+        name = "Marvin";
+      } else {
+        name = "Rogelio";
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Timer.periodic(Duration(seconds: 5), (value) {
+      if (changesEnabled) {
+        _changeName();
+        if (progressValue == 1.0) {
+          progressValue = 0;
+        }
+        progressValue += .05;
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }
