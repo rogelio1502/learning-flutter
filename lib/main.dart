@@ -31,59 +31,42 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('StateFull Widget'),
+        title: const Text('Gesture Detector'),
       ),
-      body: Column(
-        children: [
-          Center(
-            child: Text(name),
-          ),
-          LinearProgressIndicator(
-            value: progressValue,
-          ),
-          Switch(
-              value: changesEnabled,
-              onChanged: (value) {
-                _enableChange(value);
-              })
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.change_circle),
-        onPressed: _changeName,
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            GestureDetector(
+              onTap: () {
+                print("On tap");
+              },
+              onLongPress: () {
+                print("Se ha mantenido el tap");
+              },
+              child: Text(
+                'Hola',
+                style: TextStyle(fontSize: 100),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                print("InkWell on tap");
+              },
+              child: Text(
+                'Hola',
+                style: TextStyle(fontSize: 100),
+              ),
+            ),
+          ],
+        ),
       ),
     );
-  }
-
-  void _enableChange(bool enable) {
-    setState(() {
-      changesEnabled = enable;
-    });
-  }
-
-  void _changeName() {
-    setState(() {
-      if (name == "Rogelio") {
-        name = "Marvin";
-      } else {
-        name = "Rogelio";
-      }
-    });
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer.periodic(Duration(seconds: 5), (value) {
-      if (changesEnabled) {
-        _changeName();
-        if (progressValue == 1.0) {
-          progressValue = 0;
-        }
-        progressValue += .05;
-      }
-    });
   }
 
   @override
