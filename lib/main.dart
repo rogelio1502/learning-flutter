@@ -36,26 +36,27 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                print("On tap");
-              },
-              onLongPress: () {
-                print("Se ha mantenido el tap");
-              },
-              child: Text(
-                'Hola',
-                style: TextStyle(fontSize: 100),
-              ),
+            RaisedButton(
+              onPressed: () {},
+              child: Text("Hola mundo"),
             ),
-            InkWell(
-              onTap: () {
-                print("InkWell on tap");
-              },
-              child: Text(
-                'Hola',
-                style: TextStyle(fontSize: 100),
+            FlatButton(
+              onPressed: () {},
+              child: Text('Hola mundo'),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.delete),
+            ),
+            OutlinedButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                ),
               ),
+              child: const Text("Hola mundo"),
             ),
           ],
         ),
