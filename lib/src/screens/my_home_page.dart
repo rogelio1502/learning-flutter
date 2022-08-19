@@ -31,6 +31,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Text('Mostrar Snackbar'),
                 ),
               ),
+              Center(
+                  child: OutlinedButton(
+                child: const Text('Mostrar Simple Dialog'),
+                onPressed: () => _showDialog(context),
+              )),
             ]),
           );
         },
@@ -55,9 +60,45 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
+  void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: const Text('Acciones'),
+          titlePadding: const EdgeInsets.all(30),
+          children: [
+            ListTile(
+              title: const Text('Editar'),
+              leading: const Icon(Icons.save),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            ListTile(
+              title: const Text('Eliminar'),
+              leading: const Icon(Icons.delete),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            ListTile(
+              title: const Text('Cancelar'),
+              leading: const Icon(Icons.cancel),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+      barrierDismissible: false, // works to disable back tap hide
+    );
+  }
+
   void _showSnackBar(BuildContext context) {
     SnackBar snackBar = SnackBar(
-      content: Text('Show Snackbar'),
+      content: const Text('Show Snackbar'),
       backgroundColor: Colors.red,
       action: SnackBarAction(
         label: 'Cancelar',
@@ -74,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Drawer(
       child: ListView(
         children: [
-          UserAccountsDrawerHeader(
+          const UserAccountsDrawerHeader(
             accountName: Text("Rogelio Torres"),
             accountEmail: Text("rogelio@gmail.com"),
           ),
