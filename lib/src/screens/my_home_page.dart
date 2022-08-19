@@ -18,12 +18,22 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: Center(
-        child: Column(children: const [
-          Center(
-            child: Text('Hola mundo'),
-          )
-        ]),
+      body: Builder(
+        builder: (BuildContext context) {
+          return Center(
+            child: Column(children: [
+              const Center(
+                child: Text('Hola mundo'),
+              ),
+              Center(
+                child: OutlinedButton(
+                  onPressed: () => _showSnackBar(context),
+                  child: const Text('Mostrar Snackbar'),
+                ),
+              ),
+            ]),
+          );
+        },
       ),
       drawer: _getDrawer(context),
       floatingActionButton: FloatingActionButton(
@@ -43,6 +53,21 @@ class _MyHomePageState extends State<MyHomePage> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+  }
+
+  void _showSnackBar(BuildContext context) {
+    SnackBar snackBar = SnackBar(
+      content: Text('Show Snackbar'),
+      backgroundColor: Colors.red,
+      action: SnackBarAction(
+        label: 'Cancelar',
+        onPressed: () {
+          print("Cancelar");
+        },
+      ),
+    );
+    // _scaffoldKey.currentState?.showSnackBar(snackBar);
+    Scaffold.of(context).showSnackBar(snackBar);
   }
 
   Widget _getDrawer(BuildContext context) {
