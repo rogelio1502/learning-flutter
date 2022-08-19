@@ -32,10 +32,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Center(
-                  child: OutlinedButton(
-                child: const Text('Mostrar Simple Dialog'),
-                onPressed: () => _showDialog(context),
-              )),
+                child: OutlinedButton(
+                  child: const Text('Mostrar Simple Dialog'),
+                  onPressed: () => _showDialog(context),
+                ),
+              ),
+              Center(
+                child: OutlinedButton(
+                  child: const Text('Show AlertDialog'),
+                  onPressed: () => _showDialog(context, 2),
+                ),
+              )
             ]),
           );
         },
@@ -60,40 +67,69 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
-  void _showDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-          title: const Text('Acciones'),
-          titlePadding: const EdgeInsets.all(30),
-          children: [
-            ListTile(
-              title: const Text('Editar'),
-              leading: const Icon(Icons.save),
-              onTap: () {
-                Navigator.of(context).pop();
-              },
+  void _showDialog(BuildContext context, [int type = 1]) {
+    if (type == 2) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Alert Dialog'),
+            content: Text('¿Deseas borrar el elemento?'),
+            actions: [
+              FlatButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Si')),
+              FlatButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('No')),
+            ],
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          );
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: const Text('Acciones'),
+            titlePadding: const EdgeInsets.all(30),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
-            ListTile(
-              title: const Text('Eliminar'),
-              leading: const Icon(Icons.delete),
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            ListTile(
-              title: const Text('Cancelar'),
-              leading: const Icon(Icons.cancel),
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-      barrierDismissible: false, // works to disable back tap hide
-    );
+            children: [
+              ListTile(
+                title: const Text('Editar'),
+                leading: const Icon(Icons.save),
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                title: const Text('Eliminar'),
+                leading: const Icon(Icons.delete),
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                title: const Text('Cancelar'),
+                leading: const Icon(Icons.cancel),
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+        barrierDismissible: false, // works to disable back tap hide
+      );
+    }
   }
 
   void _showSnackBar(BuildContext context) {
