@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/src/screens/hero_screen.dart';
 import 'package:my_app/src/screens/my_home_page.dart';
 
 import 'package:my_app/src/screens/second_page.dart';
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         '/': (context) => const MyHomePage(),
-        '/second': (context) => const SecondPage()
+        '/second': (context) => const SecondPage(),
+        '/hero': (context) => const HeroScreen(),
       },
     );
   }

@@ -18,34 +18,28 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: Builder(
-        builder: (BuildContext context) {
-          return Center(
-            child: Column(children: [
-              const Center(
-                child: Text('Hola mundo'),
-              ),
-              Center(
-                child: OutlinedButton(
-                  onPressed: () => _showSnackBar(context),
-                  child: const Text('Mostrar Snackbar'),
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          String general_url = 'https://picsum.photos/id/$index/';
+          String url = "${general_url}400/300";
+
+          return InkWell(
+            child: Hero(
+              tag: general_url,
+              child: Card(
+                child: FadeInImage(
+                  image: NetworkImage(url),
+                  placeholder: AssetImage('assets/loading.gif'),
+                  height: 300,
                 ),
               ),
-              Center(
-                child: OutlinedButton(
-                  child: const Text('Mostrar Simple Dialog'),
-                  onPressed: () => _showDialog(context),
-                ),
-              ),
-              Center(
-                child: OutlinedButton(
-                  child: const Text('Show AlertDialog'),
-                  onPressed: () => _showDialog(context, 2),
-                ),
-              )
-            ]),
+            ),
+            onTap: () {
+              Navigator.of(context).pushNamed('/hero', arguments: general_url);
+            },
           );
         },
+        itemCount: 50,
       ),
       drawer: _getDrawer(context),
       floatingActionButton: FloatingActionButton(
