@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/src/screens/second_page.dart';
+import 'package:my_app/src/screens/widgets/drawer/main.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -41,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         itemCount: 50,
       ),
-      drawer: _getDrawer(context),
+      drawer: mainDrawer(context),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.menu),
         onPressed: () => _scaffoldKey.currentState!.openDrawer(),
@@ -139,54 +140,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     // _scaffoldKey.currentState?.showSnackBar(snackBar);
     Scaffold.of(context).showSnackBar(snackBar);
-  }
-
-  Widget _getDrawer(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        children: [
-          const UserAccountsDrawerHeader(
-            accountName: Text("Rogelio Torres"),
-            accountEmail: Text("rogelio@gmail.com"),
-          ),
-          DrawerHeader(
-            decoration: const BoxDecoration(color: Colors.black),
-            child: Row(children: const [
-              FlutterLogo(
-                size: 100,
-              ),
-              Text(
-                'My App',
-                style: TextStyle(fontSize: 30, color: Colors.white),
-              )
-            ]),
-          ),
-          ListTile(
-            title: const Text('Home'),
-            leading: const Icon(Icons.home),
-            onTap: () => _goHome(context),
-          ),
-          ListTile(
-            title: const Text('Second Page'),
-            leading: const Icon(Icons.home),
-            onTap: () => _goSecondPage(context),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _goHome(BuildContext context) {
-    Navigator.pop(context);
-  }
-
-  void _goSecondPage(BuildContext context) {
-    Navigator.of(context).pushNamed(
-      '/second',
-      arguments: SecondPageArguments(
-        name: "Rgoelio",
-        lastName: "Pasillas",
-      ),
-    );
   }
 }
